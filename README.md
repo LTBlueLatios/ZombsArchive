@@ -6,4 +6,4 @@ RIP. It had a good run. 2017-2024. If only Yang wasn't so focused on pumping cas
 
 This is a WIP. More content will be included soon.
 
-The official death of Zombs.io was dictated by incredibly low player count and the desensitisation of world records.
+The "death" of Zombs.io was personally dictated by incredibly low player count and the desensitisation of world records.
