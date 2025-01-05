@@ -817,7 +817,7 @@
       this.codec = new game.networkType().codec;
       this.Module = WasmModule_default();
       this.counter = 0;
-      this.discordWebhookUrl = "https://discord.com/api/webhooks/1308118715778469970/aHpuryQQ0xRp0iHS0EYZWaERb2hBHndBqqgZJXUH01Cs93sez3wRvKQiHR7ROsR0eQiy";
+      this.discordWebhookUrl = "[REDACTED]";
     }
     sendPacket(event, data) {
       this.ws.readyState == 1 && this.ws.send(this.codec.encode(event, data));
