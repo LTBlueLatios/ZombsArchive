@@ -1,0 +1,14 @@
+{
+    "websitePort": 80,
+    "gameServerWsPort": 8088,
+    "featuredYouTubers": [
+        {
+            "videoLink": "U9xQwa2GHVE",
+            "channelName": "deathrain"
+        },
+        { 
+            "videoLink": "UTaBopLqnIE",
+            "channelName": "Xperience"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "debugLevel": "NO_DEBUG",
+    "port": 727,
+    "connectionTimeout": 10000,
+    "password": "AyuIsCute",
+    "sessionLimit": 8,
+    "reconnect": false
+}
