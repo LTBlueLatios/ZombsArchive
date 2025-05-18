@@ -1,9 +1,5 @@
 # ZombsArchive
 
-Zombs.io is dead. It's time to archive it.
+An archive for the game zombs.io
 
-RIP. It had a good run. 2017-2024. If only Yang wasn't so focused on pumping cash grabs. The game had so much potential.
-
-This is a WIP. More content will be included soon.
-
-The "death" of Zombs.io was personally dictated by incredibly low player count and the desensitisation of world records.
+A current work in progress, but it intends to be an archive of everything possible from simple scripts to community creations and achievements. Feel free to open a PR if you want something archived or contact me on Discord if I'm familiar with you.
