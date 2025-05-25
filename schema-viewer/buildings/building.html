@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Schema - Buildings Visualizer</h1>
+            <div class="buildings-grid" id="buildingsGrid"></div>
+        </div>
+
+        <script src="index.js" type="module"></script>
+    </body>
+
+    <template id="building-card-template">
+        <div class="building-card">
+            <div class="building-header">
+                <div class="building-icon"></div>
+                <div class="building-title">
+                    <div class="building-name"></div>
+                    <div class="building-class"></div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="section-title">Level</div>
+                <div class="level-selector"></div>
+            </div>
+
+            <div class="stats-section">
+                <div class="section-title">Stats & Costs</div>
+                <div class="stats-content">
+                    <div class="costs-grid">
+                        <div class="cost-item cost-gold">
+                            <div class="cost-label">Gold</div>
+                            <div class="cost-value">0</div>
+                        </div>
+                        <div class="cost-item cost-wood">
+                            <div class="cost-label">Wood</div>
+                            <div class="cost-value">0</div>
+                        </div>
+                        <div class="cost-item cost-stone">
+                            <div class="cost-label">Stone</div>
+                            <div class="cost-value">0</div>
+                        </div>
+                    </div>
+                    <div class="stat-grid"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="stat-item-template">
+        <div class="stat-item">
+            <span class="stat-label"></span>
+            <span class="stat-value"></span>
+        </div>
+    </template>
+</html>

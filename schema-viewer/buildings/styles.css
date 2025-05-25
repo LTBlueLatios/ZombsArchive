@@ -1,0 +1,555 @@
+/**
+ * TODO:
+ * If someone pays me 5 cents I'll make it so the tower images match their tier colours.
+ * Pluh.
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Hammersmith One", sans-serif;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-image: url("map-grass.png");
+    background-size: 48px 48px;
+    background-repeat: repeat;
+    min-height: 100vh;
+    padding: 20px;
+    color: #eee;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #eee;
+    font-size: 2.5em;
+    font-family: "Hammersmith One", sans-serif;
+    margin-bottom: 30px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.buildings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.building-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+    padding: 20px;
+    transition: all 0.15s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.building-card:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.building-card:hover .building-icon {
+    transform: scale(1.05);
+    transition: transform 0.15s ease-in-out;
+}
+
+.building-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.building-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.building-title {
+    flex: 1;
+}
+
+.building-name {
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: "Hammersmith One", sans-serif;
+    color: #eee;
+    margin-bottom: 2px;
+}
+
+.building-class {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "Open Sans", sans-serif;
+}
+
+.stats-section {
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.level-selector {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.level-btn {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    background: #444;
+    color: #eee;
+    border: 0;
+    font-size: 12px;
+    font-family: "Hammersmith One", sans-serif;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+.level-btn:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+.level-btn:active {
+    transform: translateY(1px);
+}
+
+.level-btn.active {
+    background-color: #47950d;
+    color: #eee;
+}
+
+.level-btn.active:hover {
+    background-color: #64b820;
+}
+
+.costs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 0.9em;
+    position: relative;
+}
+
+.cost-item::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.cost-gold::before {
+    background: #fbb13b;
+}
+
+.cost-wood::before {
+    background: #8b4513;
+}
+
+.cost-stone::before {
+    background: #708090;
+}
+
+.cost-token::before {
+    background: #d44613;
+}
+
+.cost-value {
+    font-weight: bold;
+    color: #eee;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    font-size: 0.9em;
+}
+
+.stat-value {
+    font-weight: bold;
+    color: #eee;
+    font-family: "Hammersmith One", sans-serif;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    position: relative;
+    cursor: help;
+    transition: all 0.15s ease-in-out;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.stat-item[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 1);
+    color: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: normal;
+    z-index: 1000;
+    margin-bottom: 6px;
+    border: 0;
+    font-family: "Open Sans", sans-serif;
+    font-weight: normal;
+    max-width: 280px;
+    width: max-content;
+    text-align: left;
+    line-height: 24px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.stat-item[data-tooltip]:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.6);
+    z-index: 1001;
+}
+
+@keyframes tooltip-appear {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-5px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: "Open Sans", sans-serif;
+}
+
+.building-card[data-building="GoldStash"] .building-icon {
+    background: url("../../Archive/assets/image/entity/gold-stash/gold-stash-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="GoldMine"] .building-icon {
+    background: url("../../Archive/assets/image/entity/gold-mine/gold-mine-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.building-card[data-building="GoldMine"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../../Archive/assets/image/entity/gold-mine/gold-mine-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="Door"] .building-icon {
+    background: url("../../Archive/assets/image/entity/door/door-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="Wall"] .building-icon {
+    background: url("../../Archive/assets/image/entity/wall/wall-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="ArrowTower"] .building-icon {
+    background: url("../../Archive/assets/image/entity/arrow-tower/arrow-tower-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.building-card[data-building="ArrowTower"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../../Archive/assets/image/entity/arrow-tower/arrow-tower-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="CannonTower"] .building-icon {
+    background: url("../../Archive/assets/image/entity/arrow-tower/arrow-tower-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.building-card[data-building="CannonTower"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../../Archive/assets/image/entity/cannon-tower/cannon-tower-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="Harvester"] .building-icon {
+    background: url("../../Archive/assets/image/entity/harvester/harvester-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.building-card[data-building="Harvester"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("../../Archive/assets/image/entity/harvester/harvester-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="MagicTower"] .building-icon {
+    background: url("../../Archive/assets/image/entity/mage-tower/mage-tower-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+/** [PATCH] Tower head is smaller than normal so size is micro managed */
+.building-card[data-building="MagicTower"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: url("../../Archive/assets/image/entity/mage-tower/mage-tower-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="MeleeTower"] .building-icon {
+    background: url("../../Archive/assets/image/entity/melee-tower/melee-tower-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+.building-card[data-building="MeleeTower"] .building-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: url("../../Archive/assets/image/entity/melee-tower/melee-tower-t1-middle.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.building-card[data-building="MeleeTower"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    background: url("../../Archive/assets/image/entity/melee-tower/melee-tower-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+}
+
+.building-card[data-building="BombTower"] .building-icon {
+    background: url("../../Archive/assets/image/entity/bomb-tower/bomb-tower-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+/** [PATCH] Tower head is smaller than normal so size is micro managed */
+.building-card[data-building="BombTower"] .building-icon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 15px;
+    background: url("../../Archive/assets/image/entity/bomb-tower/bomb-tower-t1-head.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.building-card[data-building="SlowTrap"] .building-icon {
+    background: url("../../Archive/assets/image/entity/slow-trap/slow-trap-t1-base.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .buildings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .costs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-item[data-tooltip]:hover::after {
+        left: 0;
+        right: 0;
+        transform: none;
+        max-width: none;
+        margin: 0 10px 6px 10px;
+    }
+
+    .stat-item[data-tooltip]:hover::before {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}

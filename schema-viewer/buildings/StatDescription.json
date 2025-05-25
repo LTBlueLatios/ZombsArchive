@@ -1,0 +1,12 @@
+{
+    "Health": "How much damage the building can absorb before being destroyed.",
+    "Health Regen": "How much health the building automatically restores per second when damaged.",
+    "Gold/Second": "How much gold the building generates passively each second.",
+    "Zombie Damage": "How much damage the building deals to zombies with each attack.",
+    "Player Damage": "How much damage the building deals to enemy players with each attack.",
+    "Range": "How far the building can detect and engage targets from its position.",
+    "AOE Radius": "The radius in which the projectile deals damage after landing.",
+    "Attack Speed": "How many attacks the building performs per second.",
+    "Slow Duration": "How long the building's slow effect lasts on zombies (Players aren't affected for some reason).",
+    "Slow Amount": "How much the building reduces enemy movement speed as a percentage. (Players aren't affected for some reason)"
+}
